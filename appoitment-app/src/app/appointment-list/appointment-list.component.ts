@@ -14,7 +14,27 @@ export class AppointmentListComponent {
   appointments: Appointment[] = []
 
   addAppointment() {
-    alert(this.newAppointmentTitle + " " + this.newAppointmentDate)
+    if(this.#isValidTitle() && this.newAppointmentDate) {
+      let newAppointment = {
+        id: Date.now(),
+        title: this.newAppointmentTitle,
+        date: this.newAppointmentDate,
+      }
+
+      this.appointments.push(newAppointment)
+
+      this.#clearInputFields()
+
+      alert("Appoitments length: " + this.appointments.length)
+    }
+
+  }
+
+  #isValidTitle(): boolean { return this.newAppointmentTitle.trim().length > 0 }
+
+  #clearInputFields(){
+    this.newAppointmentTitle = ""
+    this.newAppointmentDate = new Date()
   }
 
 }
