@@ -24,10 +24,11 @@ export class AppointmentListComponent {
       this.appointments.push(newAppointment)
 
       this.#clearInputFields()
-
-      alert("Appoitments length: " + this.appointments.length)
     }
+  }
 
+  deleteAppointment(index: number) {
+    this.appointments.splice(index, 1)
   }
 
   #isValidTitle(): boolean { return this.newAppointmentTitle.trim().length > 0 }
