@@ -53,13 +53,7 @@ export class AppointmentListComponent implements OnInit {
 
   #getAppointments(): Appointment[] {
     const json = localStorage.getItem(this.#appoitmentsKey)
-    let appointments = []
-    
-    if(typeof json === 'string') {
-     appointments = JSON.parse(json)
-    }
-
-    return appointments
+    return json ? JSON.parse(json) : []
   }
 
 }
