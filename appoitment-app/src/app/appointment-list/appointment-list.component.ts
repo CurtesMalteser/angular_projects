@@ -8,11 +8,10 @@ import { Appointment } from '../models/appointment';
 })
 export class AppointmentListComponent {
 
-  appointment: Appointment = {
-    id: 1,
-    title: 'Take cat for a walk',
-    date: new Date('2024-01-24'),
-  }
+  newAppointmentTitle = ""
+  newAppointmentDate = new Date()
+
+  appointments: Appointment[] = []
 
 
 }
