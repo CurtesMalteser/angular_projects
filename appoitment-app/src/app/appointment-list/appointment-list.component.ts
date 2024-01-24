@@ -8,6 +8,8 @@ import { Appointment } from '../models/appointment';
 })
 export class AppointmentListComponent {
 
+  #appoitmentsKey = "appointments"
+
   newAppointmentTitle = ""
   newAppointmentDate = new Date()
 
@@ -24,11 +26,13 @@ export class AppointmentListComponent {
       this.appointments.push(newAppointment)
 
       this.#clearInputFields()
+      this.#storeAppointments()
     }
   }
 
   deleteAppointment(index: number) {
     this.appointments.splice(index, 1)
+    this.#storeAppointments()
   }
 
   #isValidTitle(): boolean { return this.newAppointmentTitle.trim().length > 0 }
@@ -36,6 +40,10 @@ export class AppointmentListComponent {
   #clearInputFields(){
     this.newAppointmentTitle = ""
     this.newAppointmentDate = new Date()
+  }
+
+  #storeAppointments() {
+    localStorage.setItem(this.#appoitmentsKey, JSON.stringify(this.appointments))
   }
 
 }
