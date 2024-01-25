@@ -21,7 +21,6 @@ export class ReservationFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      console.log(this.reservationService.helloService)
       this.reservationForm = this.formBuilder.group({
         checkInDate: ['', Validators.required],
         checkOutDate: ['', Validators.required],
