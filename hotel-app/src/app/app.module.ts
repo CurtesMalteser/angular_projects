@@ -3,6 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ReservationModule } from './reservation/reservation.module';
+
+import { RESERVATION_SERVICE } from './reservation/reservation.service';
+import { ReservationServiceImpl } from './reservation/reservation.service';
+
 
 @NgModule({
   declarations: [
@@ -10,9 +15,10 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReservationModule,
   ],
-  providers: [],
+  providers: [{provide: RESERVATION_SERVICE, useClass: ReservationServiceImpl }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
