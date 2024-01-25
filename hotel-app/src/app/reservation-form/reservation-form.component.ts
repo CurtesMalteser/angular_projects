@@ -32,7 +32,8 @@ export class ReservationFormComponent implements OnInit {
 
     onSubmit() {
        if (this.reservationForm.valid) {
-         console.log("Valid")
+        const reservation = this.reservationForm.value
+        this.reservationService.addReservation(reservation)
       }
     }
 }

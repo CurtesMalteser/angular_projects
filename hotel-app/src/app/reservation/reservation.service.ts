@@ -2,6 +2,7 @@ import { InjectionToken } from '@angular/core';
 import { Reservation } from '../models/reservation';
 
 export const RESERVATION_SERVICE = new InjectionToken<ReservationService>('reservation.service');
+const RESERVATIONS_KEY : string = "reservations"
 
 export interface ReservationService {
   getReservations(): Reservation[]
@@ -11,9 +12,16 @@ export interface ReservationService {
   updateReservation(updatedReservation: Reservation): void
 }
 
-export class ReservationServiceImpl implements ReservationService {
+
+export class ReservationServiceImpl implements ReservationService{
+
 
   private reservations: Reservation[] = []
+
+  constructor() {
+    const jsonReservations =  localStorage.getItem(RESERVATIONS_KEY)
+    this.reservations = jsonReservations ? JSON.parse(jsonReservations) : []
+  }
 
   getReservations(): Reservation[] { return this.reservations }
 
@@ -23,15 +31,22 @@ export class ReservationServiceImpl implements ReservationService {
 
   addReservation(reservation: Reservation) {
     this.reservations.push(reservation)
+    this.#storeReservations()
   }
 
   deleteReservation(id: string): void {
     let index = this.reservations.findIndex(reservation => reservation.id === id)
     this.reservations.splice(index, 1)
+    this.#storeReservations()
   }
 
   updateReservation(updatedReservation: Reservation): void {
     let index = this.reservations.findIndex(reservation => reservation.id === updatedReservation.id)
     this.reservations[index] = updatedReservation
+    this.#storeReservations()
+  }
+
+  #storeReservations() {
+    localStorage.setItem(RESERVATIONS_KEY, JSON.stringify(this.reservations))
   }
 }
