@@ -5,7 +5,6 @@ export const RESERVATION_SERVICE = new InjectionToken<ReservationService>('reser
 
 export interface ReservationService {
   helloService : string
-
 }
 
 @Injectable({
