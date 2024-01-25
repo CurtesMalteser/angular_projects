@@ -10,7 +10,7 @@
                 <input class="form-control" [(ngModel)]="newBookTitle" placeholder="Title">
             </div>
             <div class="col-md-4">
-                <input [(ngModel)]="newBookAuthor" placeholder="Author">
+                <input class="form-control" [(ngModel)]="newBookAuthor" placeholder="Author">
             </div>
             <div class="col-md-2">
                 <button class="btn btn-primary w-100" (click)= "addBook()">Add Book</button>
@@ -21,9 +21,9 @@
     <h2 class="text-center mt-5">Books</h2>
 
     <ul class="list-group mt-3">
-        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let book of books; index as i">
-            {{book.title}} {{book.author}}
-            <button class="btn btn-danger" (click)="deleteBook(i)">Delete</button>
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let book of books">
+            {{book.title}}
+            <button class="btn btn-danger" (click)="deleteBook(book.id)">Delete</button>
         </li>
     </ul>
 </div>

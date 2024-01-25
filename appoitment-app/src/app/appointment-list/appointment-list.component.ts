@@ -22,7 +22,7 @@ export class AppointmentListComponent implements OnInit {
 
   addAppointment() {
     if(this.#isValidTitle() && this.newAppointmentDate) {
-      let newAppointment = {
+      const newAppointment = {
         id: Date.now(),
         title: this.newAppointmentTitle,
         date: this.newAppointmentDate,
