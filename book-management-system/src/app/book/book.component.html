@@ -1,1 +1,29 @@
-<p>book works!</p>
+<div>
+    <div>
+        <div>
+            <div>
+                <h2>Add new book</h2>
+            </div>
+        </div>
+        <div>
+            <div>
+                <input class="form-control" [(ngModel)]="newBookTitle" placeholder="Book Title">
+            </div>
+            <div>
+                <input [(ngModel)]="newBookAuthor" placeholder="Book Author">
+            </div>
+            <div>
+                <button (click)= "addBook()">Add Book</button>
+            </div>
+        </div>
+    </div>
+
+    <h2>Books</h2>
+
+    <ul>
+        <li *ngFor="let book of books; index as i">
+            {{book.title}} {{book.author}}
+            <button (click)="deleteBook(i)">Delete</button>
+        </li>
+    </ul>
+</div>
