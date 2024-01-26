@@ -3,7 +3,7 @@ import { Inject } from '@angular/core';
 import { RESERVATION_SERVICE } from '../reservation/reservation.service';
 import { ReservationService } from '../reservation/reservation.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-reservation-form',
@@ -14,10 +14,13 @@ export class ReservationFormComponent implements OnInit {
 
   reservationForm : FormGroup = new FormGroup({});
 
+  #routeId = () : string | null => { return this.activatedRoute.snapshot.paramMap.get('id') }
+
   constructor(
     private formBuilder: FormBuilder,
     @Inject(RESERVATION_SERVICE) private reservationService: ReservationService,
     private router: Router,
+    private activatedRoute: ActivatedRoute, 
     ) {
 
     }
@@ -30,13 +33,30 @@ export class ReservationFormComponent implements OnInit {
         guestEmail: ['', [Validators.required, Validators.email]],
         roomNumber: ['', Validators.required],
       })
+
+      this.#fillFormByRouteID()
     }
 
     onSubmit() {
        if (this.reservationForm.valid) {
         const reservation = this.reservationForm.value
-        this.reservationService.addReservation(reservation)
+        const id = this.#routeId()
+        if(id) {
+          this.reservationService.updateReservation(id, reservation)
+        } else {
+          this.reservationService.addReservation(reservation)
+        }
         this.router.navigate(['/reservations'])
       }
     }
-}
+
+    #fillFormByRouteID() {
+      const id = this.activatedRoute.snapshot.paramMap.get('id')
+      if(id) {
+        const reservation = this.reservationService.getReservation(id)
+        if(reservation) {
+          this.reservationForm.patchValue(reservation)
+        }
+      } 
+    }
+  }

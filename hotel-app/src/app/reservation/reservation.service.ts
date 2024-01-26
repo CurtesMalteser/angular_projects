@@ -9,12 +9,11 @@ export interface ReservationService {
   getReservation(id: string): Reservation | undefined
   addReservation(reservation: Reservation) : void
   deleteReservation(id: string) : void
-  updateReservation(updatedReservation: Reservation): void
+  updateReservation(id: string, updatedReservation: Reservation): void
 }
 
 
 export class ReservationServiceImpl implements ReservationService{
-
 
   private reservations: Reservation[] = []
 
@@ -30,6 +29,7 @@ export class ReservationServiceImpl implements ReservationService{
   }
 
   addReservation(reservation: Reservation) {
+    reservation.id = Date.now().toString()
     this.reservations.push(reservation)
     this.#storeReservations()
   }
@@ -40,7 +40,8 @@ export class ReservationServiceImpl implements ReservationService{
     this.#storeReservations()
   }
 
-  updateReservation(updatedReservation: Reservation): void {
+  updateReservation(id: string, updatedReservation: Reservation): void {
+    updatedReservation.id = id
     let index = this.reservations.findIndex(reservation => reservation.id === updatedReservation.id)
     this.reservations[index] = updatedReservation
     this.#storeReservations()
