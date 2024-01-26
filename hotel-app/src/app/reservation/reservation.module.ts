@@ -4,6 +4,7 @@ import { ReservationFormComponent } from '../reservation-form/reservation-form.c
 import { ReservationListComponent } from '../reservation-list/reservation-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HomeModule } from '../home/home.module';
 
 import { RESERVATION_SERVICE } from '../reservation/reservation.service';
 import { ReservationServiceImpl } from '../reservation/reservation.service';
@@ -18,6 +19,7 @@ import { ReservationServiceImpl } from '../reservation/reservation.service';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    HomeModule,
   ],
   providers: [{provide: RESERVATION_SERVICE, useClass: ReservationServiceImpl }],
 })
