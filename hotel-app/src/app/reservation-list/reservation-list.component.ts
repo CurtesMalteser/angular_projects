@@ -20,4 +20,8 @@ export class ReservationListComponent implements OnInit{
     console.log(this.reservations)
   }
 
+  deleteReservation(id: string) {
+    this.reservationService.deleteReservation(id)
+  }
+
 }
