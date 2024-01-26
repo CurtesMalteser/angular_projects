@@ -9,7 +9,7 @@ import { Reservation } from '../models/reservation';
 })
 export class ReservationListComponent implements OnInit{
 
-  private reservations: Reservation[] = []
+  reservations: Reservation[] = []
 
   constructor(
     @Inject(RESERVATION_SERVICE) private reservationService: ReservationService,
