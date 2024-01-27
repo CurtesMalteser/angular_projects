@@ -42,11 +42,20 @@ export class ReservationFormComponent implements OnInit {
         const reservation = this.reservationForm.value
         const id = this.#routeId()
         if(id) {
-          this.reservationService.updateReservation(id, reservation)
+          this.reservationService.updateReservation(id, reservation).subscribe({
+            next: () => {
+              console.log("Successfully updated reservation with id: " + id)
+              this.router.navigate(['/reservations'])
+            },
+            error: (e) => console.error(e)})
         } else {
-          this.reservationService.addReservation(reservation)
+          this.reservationService.addReservation(reservation).subscribe({
+            next: () => {
+              console.log("Successfully created reservation")
+              this.router.navigate(['/reservations'])
+            },
+            error: (e) => console.error(e)})
         }
-        this.router.navigate(['/reservations'])
       }
     }
 
