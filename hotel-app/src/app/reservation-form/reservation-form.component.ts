@@ -4,7 +4,6 @@ import { RESERVATION_SERVICE } from '../reservation/reservation.service';
 import { ReservationService } from '../reservation/reservation.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Reservation } from '../models/reservation';
 
 @Component({
   selector: 'app-reservation-form',

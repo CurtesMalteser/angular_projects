@@ -10,7 +10,7 @@ export interface ReservationService {
   getReservations(): Observable<Reservation[]>
   getReservation(id: string): Observable<Reservation>
   addReservation(reservation: Reservation) : void
-  deleteReservation(id: string) : void
+  deleteReservation(id: string) : Observable<void>
   updateReservation(id: string, updatedReservation: Reservation): void
 }
 
@@ -40,9 +40,10 @@ export class ReservationServiceImpl implements ReservationService{
     this.reservations.push(reservation)
   }
 
-  deleteReservation(id: string): void {
-    let index = this.reservations.findIndex(reservation => reservation.id === id)
-    this.reservations.splice(index, 1)
+  deleteReservation(id: string): Observable<void> {
+    return this.httpClient
+    .delete<void>(this.apiUrl + Endpoint.Reservation + id)
+    .pipe(single())
   }
 
   updateReservation(id: string, updatedReservation: Reservation): void {
