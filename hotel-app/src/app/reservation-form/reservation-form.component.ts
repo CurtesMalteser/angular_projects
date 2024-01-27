@@ -4,6 +4,7 @@ import { RESERVATION_SERVICE } from '../reservation/reservation.service';
 import { ReservationService } from '../reservation/reservation.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Reservation } from '../models/reservation';
 
 @Component({
   selector: 'app-reservation-form',
@@ -53,10 +54,10 @@ export class ReservationFormComponent implements OnInit {
     #fillFormByRouteID() {
       const id = this.activatedRoute.snapshot.paramMap.get('id')
       if(id) {
-        const reservation = this.reservationService.getReservation(id)
-        if(reservation) {
-          this.reservationForm.patchValue(reservation)
-        }
+        this.reservationService.getReservation(id).subscribe({
+          next: (reservation) => this.reservationForm.patchValue(reservation),
+          error: (e) => console.error(e)
+        })
       } 
     }
   }

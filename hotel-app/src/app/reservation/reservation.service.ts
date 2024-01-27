@@ -2,12 +2,13 @@ import { Injectable, InjectionToken } from '@angular/core';
 import { Reservation } from '../models/reservation';
 import { HttpClient } from '@angular/common/http';
 import { Observable, single } from 'rxjs';
+import { Endpoint } from '../models/endpoint';
 
 export const RESERVATION_SERVICE = new InjectionToken<ReservationService>('reservation.service');
 
 export interface ReservationService {
   getReservations(): Observable<Reservation[]>
-  getReservation(id: string): Reservation | undefined
+  getReservation(id: string): Observable<Reservation>
   addReservation(reservation: Reservation) : void
   deleteReservation(id: string) : void
   updateReservation(id: string, updatedReservation: Reservation): void
@@ -23,11 +24,15 @@ export class ReservationServiceImpl implements ReservationService{
   constructor(private httpClient: HttpClient) {}
 
   getReservations(): Observable<Reservation[]> { 
-    return this.httpClient.get<Reservation[]>(this.apiUrl + '/reservations')
+    return this.httpClient
+    .get<Reservation[]>(this.apiUrl + Endpoint.Reservations)
+    .pipe(single())
    }
 
-  getReservation(id: string): Reservation | undefined{
-    return this.reservations.find(reservation => reservation.id === id)
+  getReservation(id: string): Observable<Reservation> {
+    return this.httpClient
+    .get<Reservation>(this.apiUrl + Endpoint.Reservation + id)
+    .pipe(single())
   }
 
   addReservation(reservation: Reservation) {

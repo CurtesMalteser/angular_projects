@@ -16,9 +16,9 @@ export class ReservationListComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.reservationService.getReservations().subscribe(reservations => {
-      this.reservations = reservations
-      console.log(this.reservations)
+    this.reservationService.getReservations().subscribe({
+      next: (reservations) => this.reservations = reservations,
+      error: (e) => console.error(e)
     })
   }
 
