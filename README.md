@@ -12,3 +12,4 @@
 |Create new service (run inside on project folder)|`ng g s <service-name>`|
 |Build app for production (idem...)|`ng build`|
 |Check for outdated dependencies, and can update update them|`ng update`|
+|Create environments|`ng g environments`|

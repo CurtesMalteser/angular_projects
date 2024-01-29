@@ -1,4 +1,5 @@
 export enum Endpoint {
     Reservations = '/reservations',
-    Reservation = '/reservation/',
+    ReservationPath = '/reservation/',
+    Reservation = '/reservation'
 }
