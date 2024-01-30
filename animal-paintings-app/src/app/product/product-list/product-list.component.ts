@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { PRODUCT_SERVICE, ProductService } from '../product.service';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-product-list',
@@ -8,13 +9,15 @@ import { PRODUCT_SERVICE, ProductService } from '../product.service';
 })
 export class ProductListComponent implements OnInit {
 
+  products : Product[] = []
+
   constructor(
     @Inject(PRODUCT_SERVICE) private productService: ProductService,
   ) { }
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
-      next: (products) => products.forEach(p => console.log(p.name)),
+      next: (products) => this.products = products,
       error: (e) => console.error(e)
     })
   }
