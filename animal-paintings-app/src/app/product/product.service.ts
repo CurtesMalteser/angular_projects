@@ -15,7 +15,7 @@ export interface ProductService {
 })
 export class ProductServiceImpl implements ProductService {
 
-  apiUrl = environment.apiUrl
+  private apiUrl = environment.apiUrl
 
   constructor(private httpClient: HttpClient) {}
 
