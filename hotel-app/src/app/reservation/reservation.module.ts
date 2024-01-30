@@ -9,6 +9,7 @@ import { HomeModule } from '../home/home.module';
 import { RESERVATION_SERVICE } from '../reservation/reservation.service';
 import { ReservationServiceImpl } from '../reservation/reservation.service';
 
+
 @NgModule({
   declarations: [
     ReservationFormComponent,
@@ -21,6 +22,6 @@ import { ReservationServiceImpl } from '../reservation/reservation.service';
     RouterModule,
     HomeModule,
   ],
-  providers: [{provide: RESERVATION_SERVICE, useClass: ReservationServiceImpl }],
+  providers: [{ provide: RESERVATION_SERVICE, useClass: ReservationServiceImpl }],
 })
 export class ReservationModule { }
