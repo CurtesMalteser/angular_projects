@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductListComponent } from './product-list/product-list.component';
 import { PRODUCT_SERVICE, ProductServiceImpl } from './product.service';
 import { MatCardModule } from '@angular/material/card';
+import { FlexModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
   imports: [
     CommonModule,
     MatCardModule,
+    FlexModule,
   ],
   providers: [{ provide: PRODUCT_SERVICE, useClass: ProductServiceImpl }]
 })
