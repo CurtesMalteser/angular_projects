@@ -15,5 +15,14 @@
                 <span class="price" matListItemLine>{{ totalPrice | currency:'CHF' }}</span>
             </mat-list-item>
         </mat-list>
+
+        <div class="text-right">
+            <button mat-flat-button color="warn" (click)="clearCart()">Clear</button>
+        </div>
+
+        <div class="text-right">
+            <button (click)="checkout()" mat-raised-button color="accent">Checkout</button>
+        </div>
+        
     </mat-card>
 </div>

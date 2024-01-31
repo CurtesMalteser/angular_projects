@@ -32,4 +32,20 @@ export class CartViewComponent implements OnInit {
       .map(item => item.price)
       .reduce((sum, current) =>  Number(sum) + Number(current), 0)
   }
+
+  clearCart(): void {
+    console.log('click click')
+    this.cartService.clearCart()
+    .subscribe({
+      next: () => {
+        this.cartItems = []
+        this.totalPrice = 0
+      },
+      error: (e) => console.error(`Clear cart failed. ${ e }`)
+    })
+  }
+
+  checkout() {
+    console.log('click click')
+  }
 }

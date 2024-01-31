@@ -32,7 +32,8 @@ export class CartServiceImpl implements CartService {
   }
 
   clearCart(): Observable<void> {
-    return this.httpClient.delete<void>(this.apiUrl)
+    return this.httpClient
+      .delete<void>(this.apiUrl)
       .pipe(single())
   }
 }
