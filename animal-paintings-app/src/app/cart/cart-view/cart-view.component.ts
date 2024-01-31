@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { CART_SERVICE, CartService } from '../cart.service';
 import { Product } from '../../models/product';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cart-view',
@@ -14,6 +15,7 @@ export class CartViewComponent implements OnInit {
 
   constructor(
     @Inject(CART_SERVICE) private cartService: CartService,
+    private snackbar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +41,7 @@ export class CartViewComponent implements OnInit {
         next: () => {
           this.cartItems = []
           this.totalPrice = 0
+          this.showSnackar('Your is empty now.')
         },
         error: (e) => console.error(`Clear cart failed. ${e}`)
       })
@@ -50,8 +53,18 @@ export class CartViewComponent implements OnInit {
         next: () => {
           this.cartItems = []
           this.totalPrice = 0
+          this.showSnackar('Your order was succefully registered.')
         },
         error: (e) => console.error(`Clear cart failed. ${e}`)
+      })
+  }
+
+  private showSnackar(message: string) {
+    this.snackbar.open(message, '',
+      {
+        duration: 2000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
       })
   }
 }

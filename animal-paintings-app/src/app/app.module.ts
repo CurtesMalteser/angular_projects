@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { CartModule } from './cart/cart.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CartModule } from './cart/cart.module';
     MatToolbarModule,
     MatButtonModule,
     CartModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
