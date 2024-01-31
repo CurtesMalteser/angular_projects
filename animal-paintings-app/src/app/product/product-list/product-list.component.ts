@@ -11,7 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ProductListComponent implements OnInit {
 
-  products: Product[] = []
+  private products: Product[] = []
+  filteredProducts: Product[] = []
 
   constructor(
     @Inject(PRODUCT_SERVICE) private productService: ProductService,
@@ -21,9 +22,17 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
-      next: (products) => this.products = products,
+      next: (products) => {
+        this.products = products
+        this.filteredProducts = products
+      },
       error: (e) => console.error(e)
     })
+  }
+
+  applyFilter(event: Event) {
+    const search = (event.target as HTMLInputElement).value.toLowerCase()
+    this.filteredProducts = this.products.filter(product => product.name.toLowerCase().includes(search))
   }
 
   addToCart(product: Product) {

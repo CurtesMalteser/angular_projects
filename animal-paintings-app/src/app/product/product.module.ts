@@ -5,6 +5,7 @@ import { PRODUCT_SERVICE, ProductServiceImpl } from './product.service';
 import { MatCardModule } from '@angular/material/card';
 import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     FlexModule,
     MatButtonModule,
+    MatInputModule,
   ],
   providers: [{ provide: PRODUCT_SERVICE, useClass: ProductServiceImpl }]
 })
