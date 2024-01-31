@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
     FlexModule,
     MatButtonModule,
     MatInputModule,
+    MatSelectModule,
   ],
   providers: [{ provide: PRODUCT_SERVICE, useClass: ProductServiceImpl }]
 })
