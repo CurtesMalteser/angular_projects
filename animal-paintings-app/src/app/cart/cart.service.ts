@@ -10,6 +10,7 @@ export interface CartService {
   addToCart(product: Product): Observable<Product>
   getCartItems(): Observable<Product[]>
   clearCart(): Observable<void>
+  checkout(product: Product[]): Observable<void>
 }
 
 @Injectable({
@@ -17,23 +18,30 @@ export interface CartService {
 })
 export class CartServiceImpl implements CartService {
 
-  private apiUrl = `${environment.apiUrl}/cart`
+  private cartUrl = `${environment.apiUrl}/cart`
+  private checkoutUrl = `${environment.apiUrl}/checkout`
 
   constructor(private httpClient: HttpClient) { }
 
   addToCart(product: Product): Observable<Product> {
-    return this.httpClient.post<Product>(this.apiUrl, product)
+    return this.httpClient.post<Product>(this.cartUrl, product)
       .pipe(single())
   }
 
   getCartItems(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(this.apiUrl)
+    return this.httpClient.get<Product[]>(this.cartUrl)
       .pipe(single())
   }
 
   clearCart(): Observable<void> {
     return this.httpClient
-      .delete<void>(this.apiUrl)
+      .delete<void>(this.cartUrl)
+      .pipe(single())
+  }
+
+  checkout(product: Product[]): Observable<void> {
+    return this.httpClient
+      .post<void>(this.checkoutUrl, product)
       .pipe(single())
   }
 }
