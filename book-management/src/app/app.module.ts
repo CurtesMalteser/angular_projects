@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BookModule } from './book/book.module';
 import { EffectsModule } from '@ngrx/effects';
 import { BookEffects } from './book/book.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { BookEffects } from './book/book.effects';
     HttpClientModule,
     BookModule,
     EffectsModule.forRoot([BookEffects]),
+    StoreDevtoolsModule.instrument(),
   ],
   providers: [],
   bootstrap: [AppComponent]
