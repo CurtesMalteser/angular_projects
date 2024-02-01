@@ -17,6 +17,16 @@ export class BookEffects {
         )
     ))
 
+    fetchBook$ = createEffect(() => this.actions$.pipe(
+        ofType(bookActions.FetchBooks),
+        mergeMap(() => this.bookService.getBooks()
+            .pipe(
+                map(books => bookActions.FetchBooksSuccess({ books })),
+                catchError((error) => of(bookActions.FetchBooksFailure({error})))
+            )
+        )
+    ))
+
     constructor(
         private actions$: Actions,
         @Inject(BOOK_SERVICE) private bookService: BookService,

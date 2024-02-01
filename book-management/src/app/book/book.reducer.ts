@@ -4,6 +4,9 @@ import {
     AddBookSuccess,
     AddBookFailure,
     RemoveBook,
+    FetchBooks,
+    FetchBooksSuccess,
+    FetchBooksFailure,
 } from "./book.actions";
 import { Book } from "../models/book";
 
@@ -11,6 +14,12 @@ export const initialState: Book[] = []
 
 export const BookReducer = createReducer(
     initialState,
+    on(FetchBooks, (state) =>  { return state } ),
+    on(FetchBooksSuccess, (state, { books }) =>  state.concat(books)),
+    on(FetchBooksFailure, (state, { error }) => { 
+        console.log(error )
+        return state
+    }),
     on(AddBook, (state) =>  { return state } ),
     on(AddBookSuccess, (state, { id, title, author }) => [...state, { id, title, author }]),
     on(AddBookFailure, (state, { error }) => { 
