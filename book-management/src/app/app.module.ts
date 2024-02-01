@@ -9,6 +9,8 @@ import { BookListComponent } from './book-list/book-list.component';
 import { AppState } from './app.state';
 import { HttpClientModule } from '@angular/common/http';
 import { BookModule } from './book/book.module';
+import { EffectsModule } from '@ngrx/effects';
+import { BookEffects } from './book/book.effects';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { BookModule } from './book/book.module';
     StoreModule.forRoot<AppState>({ book: BookReducer }),
     HttpClientModule,
     BookModule,
+    EffectsModule.forRoot([BookEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]
