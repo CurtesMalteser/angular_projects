@@ -16,7 +16,7 @@
     <div fxLayout="row wrap" fxLayoutGap="50px grid">
         <div *ngFor="let product of filteredProducts">
             <mat-card class="product-card">
-                <img mat-card-image src="{{product.image_url}}" alt="Photo of a Shiba Inu">
+                <img mat-card-image src="{{product.image_url}}" alt="Photo of one {{ product.name }}">
                 <mat-card-content>
                     <mat-card-title> {{ product.name }} </mat-card-title>
                     <mat-card-subtitle> {{ product.price | currency:'CHF'}} </mat-card-subtitle>

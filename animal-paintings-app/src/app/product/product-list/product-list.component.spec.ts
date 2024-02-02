@@ -12,6 +12,7 @@ import { single } from 'rxjs';
 import { MatCard, MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { By } from '@angular/platform-browser';
 
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
@@ -62,6 +63,32 @@ describe('ProductListComponent', () => {
     fixture.detectChanges()
 
     expect(component.filteredProducts.length).toBeGreaterThan(0)
+  })
+
+  it('applies filter', () => {
+    fixture.detectChanges()
+
+    const event = new Event('selection')
+    
+    let inputElement = (fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement)
+    inputElement.dispatchEvent(event)
+    inputElement.value = 'd'
+    
+    component.applyFilter(event)
+
+    expect(component.filteredProducts.length).toBe(2)
+  })
+
+  it('applies sort low to high', () => {
+    fixture.detectChanges()
+    component.sortProducts("priceLowHigh")
+    expect(component.filteredProducts[0].price).toBe(19)
+  })
+
+  it('applies sort high to low', () => {
+    fixture.detectChanges()
+    component.sortProducts("priceHighLow")
+    expect(component.filteredProducts[0].price).toBe(79)
   })
 
 });
