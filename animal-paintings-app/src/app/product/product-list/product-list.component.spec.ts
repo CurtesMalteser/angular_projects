@@ -3,13 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductListComponent } from './product-list.component';
 import { CART_SERVICE_PROVIDER, MockCartService } from '../../cart/mock.cart.service';
 import { MockProductService, PRODUCT_SERVICE_PROVIDER } from '../mock.product.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { CART_SERVICE } from '../../cart/cart.service';
 import { PRODUCT_SERVICE } from '../product.service';
-import { single } from 'rxjs';
-import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
@@ -17,7 +15,6 @@ import { By } from '@angular/platform-browser';
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
   let fixture: ComponentFixture<ProductListComponent>;
-  let snackbar: MatSnackBar;
   let productService: MockProductService;
   let cartService: MockCartService;
 
@@ -44,7 +41,6 @@ describe('ProductListComponent', () => {
     cartService = (TestBed.inject(CART_SERVICE) as MockCartService);
     productService = (TestBed.inject(PRODUCT_SERVICE) as MockProductService);
 
-    snackbar = TestBed.inject(MatSnackBar)
   });
 
   it('should create', () => {
@@ -89,6 +85,15 @@ describe('ProductListComponent', () => {
     fixture.detectChanges()
     component.sortProducts("priceHighLow")
     expect(component.filteredProducts[0].price).toBe(79)
+  })
+
+
+  it('adds to cart successfully', () => {
+    fixture.detectChanges()
+    const product = component.filteredProducts[0]
+    component.addToCart(product)
+
+    expect(cartService.getProducts()).toContain(product)
   })
 
 });
