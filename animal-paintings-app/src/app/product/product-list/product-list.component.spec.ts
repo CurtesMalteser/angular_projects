@@ -9,6 +9,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { CART_SERVICE } from '../../cart/cart.service';
 import { PRODUCT_SERVICE } from '../product.service';
 import { single } from 'rxjs';
+import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
@@ -21,8 +24,11 @@ describe('ProductListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ProductListComponent],
       imports: [
+        MatInputModule,
         MatFormFieldModule,
         MatSelectModule,
+        MatCardModule,
+        BrowserAnimationsModule,
       ],
       providers: [
         PRODUCT_SERVICE_PROVIDER,
@@ -52,11 +58,10 @@ describe('ProductListComponent', () => {
     expect(productService).toBeTruthy();
   });
 
-  it('get products succeffully', () => {
-    productService.getProducts()
-    .pipe(
-      single()
-    ).subscribe(products => expect(products.length).toBeGreaterThan(0))
+  it('get products on init successfully', () => {
+    fixture.detectChanges()
+
+    expect(component.filteredProducts.length).toBeGreaterThan(0)
   })
 
 });
