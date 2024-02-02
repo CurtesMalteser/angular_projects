@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { CART_SERVICE } from '../../cart/cart.service';
 import { PRODUCT_SERVICE } from '../product.service';
+import { single } from 'rxjs';
 
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
@@ -50,4 +51,12 @@ describe('ProductListComponent', () => {
   it('productService should create', () => {
     expect(productService).toBeTruthy();
   });
+
+  it('get products succeffully', () => {
+    productService.getProducts()
+    .pipe(
+      single()
+    ).subscribe(products => expect(products.length).toBeGreaterThan(0))
+  })
+
 });
