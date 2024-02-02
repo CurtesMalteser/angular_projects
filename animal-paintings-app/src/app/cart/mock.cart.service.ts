@@ -5,7 +5,8 @@ import { Product } from "../models/product";
 
 
 @Injectable()
-class MockCartService implements CartService {
+export class MockCartService implements CartService {
+
   addToCart(product: Product): Observable<Product> {
     return of(product)
   }
