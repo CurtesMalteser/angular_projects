@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BookListComponent } from '../book-list/book-list.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MatTooltip } from '@angular/material/tooltip';
     MatInputModule,
     MatButtonModule,
     MatTooltip,
+    ReactiveFormsModule,
   ],
   providers: [{ provide: BOOK_SERVICE, useClass: BookServiceImpl }]
 })

@@ -20,7 +20,7 @@ export const BookReducer = createReducer(
     on(FetchBooksSuccess, (state, { books }) => state.concat(books)),
     on(FetchBooksFailure, (state, { error }) => handleError(error, state)),
     on(AddBook, (state) => { return state }),
-    on(AddBookSuccess, (state, { id, title, author }) => [...state, { id, title, author }]),
+    on(AddBookSuccess, (state, { id, title, author, rating }) => [...state, { id, title, author, rating }]),
     on(AddBookFailure, (state, { error }) => handleError(error, state)),
     on(RemoveBook, (state) => { return state }),
     on(RemoveBookSuccess, (state, { bookId }) => state.filter(book => book.id !== bookId)),

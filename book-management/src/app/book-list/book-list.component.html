@@ -23,7 +23,8 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>Rating</mat-label>
-        <mat-select>
+        <mat-select #bookRating [formControl]="ratingControl" required>
+            <mat-option>--</mat-option>
             <mat-option value="0">0</mat-option>
             <mat-option value="1">1</mat-option>
             <mat-option value="2">2</mat-option>
@@ -31,6 +32,9 @@
             <mat-option value="4">4</mat-option>
             <mat-option value="5">5</mat-option>
         </mat-select>
+        @if (ratingControl.hasError('required')) {
+            <mat-error>Please choose the rating</mat-error>
+          }
     </mat-form-field>
-    <button mat-raised-button color="primary" matTooltip="Add book!" (click)="addBook(bookId.value, bookTitle.value, bookAuthor.value)">Add Book</button>
+    <button mat-raised-button color="primary" matTooltip="Add book!" (click)="addBook(bookId.value, bookTitle.value, bookAuthor.value, bookRating.value)">Add Book</button>
 </div>
