@@ -11,7 +11,8 @@ export class MockCartService implements CartService {
 
   addToCart(product: Product): Observable<Product> {
     return of(product).pipe(
-      tap((p) => this.products.push(p))
+      tap((p) => this.products.push(p)),
+      single()
     )
   }
   getCartItems(): Observable<Product[]> {

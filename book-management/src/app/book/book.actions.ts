@@ -7,6 +7,8 @@ export const AddBookFailure = createAction('[Book] Add Book Failure', props<{err
 
 
 export const RemoveBook = createAction('[Book] Remove Book', props<{bookId: string}>())
+export const RemoveBookSuccess = createAction('[Book] Remove Book Successfully', props<{bookId: string}>())
+export const RemoveBookFailure = createAction('[Book] Remove Book Failure', props<{error: any}>())
 
 export const FetchBooks = createAction('[Book] Fetch Books')
 export const FetchBooksSuccess = createAction('[Book] Fetched Books Successfully', props<{books: Book[]}>())

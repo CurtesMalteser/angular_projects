@@ -1,5 +1,4 @@
-import { Injectable, InjectionToken } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { Injectable } from '@angular/core';
 import { Observable, of, single } from 'rxjs';
 import { Product } from '../models/product';
 import { PRODUCT_SERVICE, ProductService } from './product.service';
@@ -8,7 +7,7 @@ import { PRODUCT_SERVICE, ProductService } from './product.service';
 export class MockProductService implements ProductService {
 
   getProducts(): Observable<Product[]> {
-    return of(this.returnProducts())
+    return of(this.returnProducts()).pipe(single())
   }
 
   private returnProducts(): Product[] {

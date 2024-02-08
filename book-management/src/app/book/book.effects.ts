@@ -27,6 +27,20 @@ export class BookEffects {
         )
     ))
 
+    removeBook$ = createEffect(() => this.actions$.pipe(
+        ofType(bookActions.RemoveBook),
+        mergeMap((book) => this.bookService.deleteBook(book.bookId)
+        .pipe(
+            map((bookId) => {
+                console.log('📗 bookId: ' + bookId)
+                return bookActions.RemoveBookSuccess({bookId})
+            }),
+            catchError((error) => of(bookActions.RemoveBookFailure({error})))
+        )
+        )
+
+    ))
+
     constructor(
         private actions$: Actions,
         @Inject(BOOK_SERVICE) private bookService: BookService,
