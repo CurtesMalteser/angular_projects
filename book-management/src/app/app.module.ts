@@ -12,11 +12,11 @@ import { BookModule } from './book/book.module';
 import { EffectsModule } from '@ngrx/effects';
 import { BookEffects } from './book/book.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BookListComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +27,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     EffectsModule.forRoot([BookEffects]),
     StoreDevtoolsModule.instrument(),
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

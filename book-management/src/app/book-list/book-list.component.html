@@ -8,9 +8,29 @@
 
 <h2>Add a new book</h2>
 
-<div>
-    <input #bookId type="text" placeholder="Book Id">
-    <input #bookTitle type="text" placeholder="Book title">
-    <input #bookAuthor type="text" placeholder="Author">
-    <button (click)="addBook(bookId.value, bookTitle.value, bookAuthor.value)">Add Book</button>
+<div class="input-container">
+    <mat-form-field hintLabel="Max 10 characters">
+        <mat-label>Enter unique book ID</mat-label>
+        <input matInput #bookId type="text" placeholder="Book Id">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Enter book title</mat-label>
+        <input matInput #bookTitle type="text" placeholder="Book title">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Enter book auhor</mat-label>
+        <input matInput #bookAuthor type="text" placeholder="Author">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Rating</mat-label>
+        <mat-select>
+            <mat-option value="0">0</mat-option>
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
+            <mat-option value="4">4</mat-option>
+            <mat-option value="5">5</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" matTooltip="Add book!" (click)="addBook(bookId.value, bookTitle.value, bookAuthor.value)">Add Book</button>
 </div>
