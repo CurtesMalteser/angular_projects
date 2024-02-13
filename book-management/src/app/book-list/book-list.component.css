@@ -5,3 +5,8 @@
 .input-container mat-form-field+button {
     margin-left: 8px;
 }
+
+.book-card {
+    max-width: 400px;
+    margin-bottom: 8px;
+  }

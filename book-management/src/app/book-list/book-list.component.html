@@ -1,7 +1,17 @@
 <div *ngFor="let book of books$ | async">
-    <h2>{{ book.title }}</h2>
-    <h2>{{ book.author }}</h2>
-    <button (click)="removeBook(book.id)">Remove Book</button>
+    <mat-card class="book-card">
+        <mat-card-header>
+            <mat-card-title-group>
+                <mat-card-title>{{ book.title }}</mat-card-title>
+                <mat-card-subtitle>{{ book.author }}</mat-card-subtitle>
+                <img mat-card-xl-image src="../assets/img/cover.jpg" >
+            </mat-card-title-group>
+            </mat-card-header>
+            <mat-divider/>
+        <mat-card-actions>
+            <button mat-button (click)="removeBook(book.id)">Remove Book</button>
+        </mat-card-actions>
+    </mat-card>
 </div>
 
 <h2>Add a new book</h2>
