@@ -12,7 +12,7 @@ import {
 } from "./book.actions";
 import { BooksResponse } from "../models/books-response";
 
-export const initialState: BooksResponse = {
+let initialState: BooksResponse = {
     books: [],
     page: 1,
     page_size: 8,
@@ -31,14 +31,18 @@ export const BookReducer = createReducer(
     on(AddBook, (state) => { return state }),
     on(AddBookSuccess, (state, { id, title, author, rating }) => {
         let books = state.books
-        state.books = [...books , { id, title, author, rating }]
+        state.books = [...books, { id, title, author, rating }]
         return state
     }),
     on(AddBookFailure, (state, { error }) => handleError(error, state)),
     on(RemoveBook, (state) => { return state }),
     on(RemoveBookSuccess, (state, { bookId }) => {
-        state.books = state.books.filter(book => book.id !== bookId)
-        return state
+        return {
+            books: state.books.filter(book => book.id !== bookId),
+            page: state.page,
+            page_size: state.page_size,
+            total_results: state.total_results,
+        }
     }),
     on(RemoveBookFailure, (state, { error }) => handleError(error, state)),
 )

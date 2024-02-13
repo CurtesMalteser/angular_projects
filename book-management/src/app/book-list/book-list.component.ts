@@ -5,7 +5,6 @@ import { Book } from '../models/book';
 import { AddBook, FetchBooks, RemoveBook } from '../book/book.actions';
 import { AppState } from '../app.state';
 import { FormControl, Validators } from '@angular/forms';
-import { Paginator } from '../models/paginator';
 import { PageEvent, MatPaginatorModule } from '@angular/material/paginator';
 
 
