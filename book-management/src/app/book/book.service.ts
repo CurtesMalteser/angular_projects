@@ -8,7 +8,7 @@ import { BooksResponse } from '../models/books-response';
 export const BOOK_SERVICE = new InjectionToken<BookService>('book.service')
 
 export interface BookService {
-  getBooks(): Observable<Book[]>
+  getBooks(): Observable<BooksResponse>
   addBook(book: Book): Observable<Book>
   deleteBook(bookId: string): Observable<string>
 }
@@ -22,12 +22,9 @@ export class BookServiceImpl implements BookService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getBooks(): Observable<Book[]> {
+  getBooks(): Observable<BooksResponse> {
     return this.httpClient.get<BooksResponse>(this.apiUrl + '/books')
-      .pipe(
-        map((response) => response.books),
-        single()
-      )
+      .pipe(single())
   }
 
   addBook(book: Book): Observable<Book> {

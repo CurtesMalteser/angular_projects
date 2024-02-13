@@ -8,6 +8,7 @@ import { BookListComponent } from '../book-list/book-list.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatTooltip,
     ReactiveFormsModule,
+    MatPaginatorModule,
   ],
   providers: [{ provide: BOOK_SERVICE, useClass: BookServiceImpl }]
 })

@@ -20,7 +20,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot<AppState>({ book: BookReducer }),
+    StoreModule.forRoot<AppState>({ response : BookReducer }),
     HttpClientModule,
     BookModule,
     EffectsModule.forRoot([BookEffects]),

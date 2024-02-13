@@ -10,24 +10,40 @@ import {
     RemoveBookSuccess,
     RemoveBookFailure,
 } from "./book.actions";
-import { Book } from "../models/book";
+import { BooksResponse } from "../models/books-response";
 
-export const initialState: Book[] = []
+export const initialState: BooksResponse = {
+    books: [],
+    page: 1,
+    total_pages: 0,
+    total_results: 0
+}
 
 export const BookReducer = createReducer(
     initialState,
     on(FetchBooks, (state) => { return state }),
-    on(FetchBooksSuccess, (state, { books }) => state.concat(books)),
+    on(FetchBooksSuccess, (state, { response }) => {
+        state = response
+        return state
+
+    }),
     on(FetchBooksFailure, (state, { error }) => handleError(error, state)),
     on(AddBook, (state) => { return state }),
-    on(AddBookSuccess, (state, { id, title, author, rating }) => [...state, { id, title, author, rating }]),
+    on(AddBookSuccess, (state, { id, title, author, rating }) => {
+        let books = state.books
+        state.books = [...books , { id, title, author, rating }]
+        return state
+    }),
     on(AddBookFailure, (state, { error }) => handleError(error, state)),
     on(RemoveBook, (state) => { return state }),
-    on(RemoveBookSuccess, (state, { bookId }) => state.filter(book => book.id !== bookId)),
+    on(RemoveBookSuccess, (state, { bookId }) => {
+        state.books = state.books.filter(book => book.id !== bookId)
+        return state
+    }),
     on(RemoveBookFailure, (state, { error }) => handleError(error, state)),
 )
 
-function handleError(error: any, state: Book[]) {
+function handleError(error: any, state: BooksResponse) {
     console.log(error)
     return state
 }

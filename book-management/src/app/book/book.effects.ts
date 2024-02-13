@@ -21,7 +21,7 @@ export class BookEffects {
         ofType(bookActions.FetchBooks),
         mergeMap(() => this.bookService.getBooks()
             .pipe(
-                map(books => bookActions.FetchBooksSuccess({ books })),
+                map(response => bookActions.FetchBooksSuccess({ response })),
                 catchError((error) => of(bookActions.FetchBooksFailure({ error })))
             )
         )
