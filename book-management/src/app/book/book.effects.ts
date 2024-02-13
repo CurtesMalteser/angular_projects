@@ -12,7 +12,7 @@ export class BookEffects {
         mergeMap((book) => this.bookService.addBook(book)
             .pipe(
                 map(book => bookActions.AddBookSuccess(book)),
-                catchError((error) => of(bookActions.AddBookFailure({error})))
+                catchError((error) => of(bookActions.AddBookFailure({ error })))
             )
         )
     ))
@@ -22,7 +22,7 @@ export class BookEffects {
         mergeMap(() => this.bookService.getBooks()
             .pipe(
                 map(books => bookActions.FetchBooksSuccess({ books })),
-                catchError((error) => of(bookActions.FetchBooksFailure({error})))
+                catchError((error) => of(bookActions.FetchBooksFailure({ error })))
             )
         )
     ))
@@ -30,13 +30,10 @@ export class BookEffects {
     removeBook$ = createEffect(() => this.actions$.pipe(
         ofType(bookActions.RemoveBook),
         mergeMap((book) => this.bookService.deleteBook(book.bookId)
-        .pipe(
-            map((bookId) => {
-                console.log('📗 bookId: ' + bookId)
-                return bookActions.RemoveBookSuccess({bookId})
-            }),
-            catchError((error) => of(bookActions.RemoveBookFailure({error})))
-        )
+            .pipe(
+                map((bookId) => bookActions.RemoveBookSuccess({ bookId })),
+                catchError((error) => of(bookActions.RemoveBookFailure({ error })))
+            )
         )
 
     ))

@@ -11,6 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { BookEffects } from './book/book.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     BookModule,
     EffectsModule.forRoot([BookEffects]),
     StoreDevtoolsModule.instrument(),
+    MatToolbarModule,
   ],
   providers: [
     provideAnimationsAsync()
