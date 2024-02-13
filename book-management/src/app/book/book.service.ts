@@ -1,8 +1,9 @@
 import { Injectable, InjectionToken } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, single, mergeMap, of } from 'rxjs';
+import { Observable, single, mergeMap, of, map } from 'rxjs';
 import { Book } from '../models/book';
+import { BooksResponse } from '../models/books-response';
 
 export const BOOK_SERVICE = new InjectionToken<BookService>('book.service')
 
@@ -22,8 +23,11 @@ export class BookServiceImpl implements BookService {
   constructor(private httpClient: HttpClient) { }
 
   getBooks(): Observable<Book[]> {
-    return this.httpClient.get<Book[]>(this.apiUrl + '/books')
-      .pipe(single())
+    return this.httpClient.get<BooksResponse>(this.apiUrl + '/books')
+      .pipe(
+        map((response) => response.books),
+        single()
+      )
   }
 
   addBook(book: Book): Observable<Book> {
@@ -37,6 +41,6 @@ export class BookServiceImpl implements BookService {
       .pipe(
         mergeMap(() => of(bookId)),
         single()
-    )
+      )
   }
 }
