@@ -15,7 +15,7 @@ import { BooksResponse } from "../models/books-response";
 export const initialState: BooksResponse = {
     books: [],
     page: 1,
-    total_pages: 0,
+    page_size: 8,
     total_results: 0
 }
 

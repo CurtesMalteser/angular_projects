@@ -37,8 +37,10 @@
     <button mat-raised-button color="primary" matTooltip="Add book!" (click)="addBook(bookId.value, bookTitle.value, bookAuthor.value, bookRating.value)">Add Book</button>
 </div>
 
-<mat-paginator *ngIf="paginator$ | async as paginator"
-    [length]="paginator.total_results"
-    [pageSize]="paginator.page_size"
+<mat-paginator *ngIf="pageEvent$ | async as paginator"
+    [length]="paginator.length"
+    [pageSize]="paginator.pageSize"
     [pageSizeOptions]="[2, 4, 6, 8, 10]"
+    (page)="handlePageEvent($event)"
+    [pageIndex]="paginator.pageIndex"
     aria-label="Select page"/>

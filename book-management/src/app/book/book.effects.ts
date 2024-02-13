@@ -19,7 +19,7 @@ export class BookEffects {
 
     fetchBook$ = createEffect(() => this.actions$.pipe(
         ofType(bookActions.FetchBooks),
-        mergeMap(() => this.bookService.getBooks()
+        mergeMap((paginator) => this.bookService.getBooks(paginator)
             .pipe(
                 map(response => bookActions.FetchBooksSuccess({ response })),
                 catchError((error) => of(bookActions.FetchBooksFailure({ error })))
